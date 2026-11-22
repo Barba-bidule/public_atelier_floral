@@ -7,6 +7,8 @@ import jakarta.annotation.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/service/users")
 public class UserController {
@@ -18,6 +20,13 @@ public class UserController {
     @GetMapping("/one")
     public ResponseEntity<User> findByLogin(@RequestParam("login") String login) {
         try { return ResponseEntity.ok(userService.findUserByLogin(login)); }
+        catch (NoContentException exception) { return ResponseEntity.noContent().build(); }
+        catch (Exception exception) { return ResponseEntity.internalServerError().build(); }
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<User>> findAll() {
+        try { return ResponseEntity.ok(userService.findAll()); }
         catch (NoContentException exception) { return ResponseEntity.noContent().build(); }
         catch (Exception exception) { return ResponseEntity.internalServerError().build(); }
     }
