@@ -9,6 +9,8 @@ import jakarta.annotation.Resource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -35,6 +37,12 @@ public class UserService {
                        .address(address)
                        .build()
         );
+    }
+
+    public List<User> findAll() {
+        List<User> users = userRepository.findAll();
+        if(users.isEmpty()) throw new NoContentException("No users found");
+        return users;
     }
 
 }
