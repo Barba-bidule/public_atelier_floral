@@ -1,0 +1,8 @@
+name: Toyota Quality
+
+on:
+  workflow_dispatch:
+
+jobs:
+  quality:
+    uses: Haingue/nuitdelinfo2026/.github/workflows/quality.yml@v1
